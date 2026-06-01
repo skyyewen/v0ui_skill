@@ -1,5 +1,5 @@
 ---
-name: v0-frontend-constraints
+name: v0ui
 description: Use when building, redesigning, or modifying frontend web apps, pages, dashboards, SaaS/admin tools, forms, tables, settings screens, landing pages, or interactive tools where the user wants v0-like modern UI quality, React, Next.js, Tailwind, shadcn/ui, responsive polish, or strict frontend generation constraints.
 ---
 
@@ -15,7 +15,7 @@ Use this skill for requests like:
 
 - `@v0ui build a SaaS dashboard`
 - `$v0ui redesign this settings page`
-- `Use v0-frontend-constraints for this UI`
+- `Use $v0ui for this UI`
 - `make this look like v0`
 - `build a modern shadcn/Tailwind frontend`
 

@@ -4,7 +4,7 @@
 
 ## 简介
 
-`v0ui_skill` 提供 `v0-frontend-constraints` Skill。
+`v0ui_skill` 提供 `v0ui` Skill。
 
 它的目标不是复制 v0，而是复用 v0 背后的有效约束方式：让 AI 编码助手在更窄、更稳定的前端设计空间里工作，优先使用现有设计系统、组件原语、Tailwind token、响应式布局、完整交互状态和浏览器验证。
 
@@ -24,7 +24,7 @@
 npx skills add skyyewen/v0ui_skill
 ```
 
-安装后即可通过 `@v0ui`、`$v0ui` 或直接点名 `v0-frontend-constraints` 来触发。
+安装后即可通过 `@v0ui` 或 `$v0ui` 来触发。
 
 ## 使用方式
 
@@ -37,7 +37,7 @@ $v0ui 用 shadcn/ui 和 Tailwind 重做这个设置页
 ```
 
 ```text
-Use v0-frontend-constraints to build this frontend.
+Use $v0ui to build this frontend.
 ```
 
 ## 主要约束
@@ -86,7 +86,7 @@ v0ui_skill/
 或者：
 
 ```text
-用 v0-frontend-constraints 约束这个前端实现
+用 $v0ui 约束这个前端实现
 ```
 
 ## License
