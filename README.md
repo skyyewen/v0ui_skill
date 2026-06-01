@@ -45,11 +45,18 @@ Use v0-frontend-constraints to build this frontend.
 - 如果项目已有技术栈，优先遵守现有技术栈和目录结构
 - 如果没有现成栈，默认偏向 React / Next.js / TypeScript / Tailwind CSS
 - 优先使用 shadcn/ui、Radix、lucide-react 或项目内已有组件
+- 吸收 v0 prompt 中适合真实项目的输出契约：完整代码、先规划结构、可访问性、媒体、依赖和运行限制
 - 用 token 控制颜色、间距、圆角、边框、阴影和字体层级
 - SaaS、后台、CRM、内部工具默认走紧凑、克制、可扫描的产品界面
 - 表单、表格、弹窗、导航、设置项必须包含合理状态和交互反馈
 - 避免随机渐变、装饰圆球、嵌套卡片、单一色系堆叠和文字溢出
 - 完成前需要检查桌面端和移动端渲染效果
+
+## 与 v0 prompt 的关系
+
+这个 Skill 会参考 v0 prompt 里有价值的通用约束，例如完整可运行代码、shadcn/ui 优先、Tailwind token、lucide-react、语义化 HTML、ARIA、`sr-only`、图片 alt、响应式设计和实现前规划。
+
+它不会照搬 v0 平台专用规则，例如 MDX code block 元数据、强制单文件、强制默认导出 `Component`、`/placeholder.svg`、Vercel Blob-only 图片规则、无条件禁止 fetch 或无条件禁止 dynamic import。
 
 ## 目录结构
 

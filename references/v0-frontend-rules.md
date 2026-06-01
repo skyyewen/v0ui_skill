@@ -4,6 +4,19 @@
 
 Make the output modern by controlling defaults. v0-like quality comes from consistent component systems, design tokens, familiar layout patterns, restrained visual decisions, complete states, and rendered verification.
 
+## V0-Inspired Output Contract
+
+Use v0's useful constraints as a project-safe contract, not as a platform clone.
+
+- Deliver complete, runnable UI changes. Do not leave TODOs, partial snippets, dead primary actions, or comments asking the user to fill in missing code.
+- Before implementing a React component or page, decide the structure, accessibility, styling, responsive behavior, media, dependencies, and runtime limits.
+- Prefer one cohesive implementation path. Avoid scattering the requested UI across unnecessary files or abstractions.
+- Use the same language as the user's brief for visible UI copy unless the product already uses another language.
+- Escape JSX text that contains `<`, `>`, `{`, `}`, or backticks so rendered content does not break the component.
+- Use type-only imports for TypeScript types, such as `import type` or `import { type Foo }`, when supported by the codebase.
+- Prefer native Web APIs and browser features when they are sufficient.
+- Treat v0 preview rules as inspiration only. Do not copy v0-only MDX block metadata, forced `Component` default exports, `/placeholder.svg` URLs, Vercel Blob-only media rules, blanket fetch bans, or blanket dynamic import bans into real projects.
+
 ## Stack Defaults
 
 Use the existing project stack first. Do not migrate frameworks or styling systems unless the user asks.
@@ -48,6 +61,16 @@ Prefer component primitives over custom markup:
 
 Use lucide-react icons when available. Do not manually draw icons unless the app already uses a custom icon system.
 
+## Accessibility
+
+- Use semantic landmarks such as `main`, `header`, `nav`, `section`, `aside`, and `footer` when they match the page structure.
+- Connect labels to form controls with `htmlFor` and `id`, or use accessible component-library equivalents.
+- Add ARIA roles and attributes only when native semantics are insufficient.
+- Include `aria-live` for dynamic status updates such as timers, async results, toast-like inline status, or validation summaries.
+- Use `sr-only` text for icon-only buttons or controls whose visual label is not descriptive enough.
+- Add useful `alt` text for informative images. Use empty alt text only for decorative images.
+- Preserve visible focus states and keyboard reachability for every interactive control.
+
 ## Layout Rules
 
 - Use stable dimensions for fixed-format elements such as boards, toolbars, grids, counters, and tiles.
@@ -64,6 +87,7 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 - Use tokens for color, border, radius, shadow, and spacing.
 - Prefer neutral surfaces with one intentional accent color.
 - Avoid one-note palettes dominated by a single hue family.
+- Avoid default blue or indigo as the primary visual identity unless the project brand, existing tokens, or user request calls for it.
 - Avoid default purple/purple-blue gradient aesthetics unless the product brand requires it.
 - Avoid decorative gradient orbs, blobs, and bokeh backgrounds.
 - Avoid pure black text on pure white when a softer foreground token exists.
@@ -97,9 +121,11 @@ Websites and games should use visual assets when visual inspection matters.
 
 - Prefer actual product/place/object/person media when available.
 - Use generated or searched bitmap images when a specific visual is needed and no repo asset exists.
+- Use project-local placeholders or existing asset conventions. Do not hard-code v0-specific placeholder paths unless the app already supports them.
 - Avoid dark, blurred, cropped, stock-like, or purely atmospheric media when users need to inspect the subject.
 - Use stable aspect ratios and object-fit rules so media cannot break the layout.
 - Do not use inline SVG illustrations as a substitute for real media unless the project style is explicitly vector-first.
+- Avoid iframes, videos, or heavy embeds unless the user explicitly needs them and the target environment supports them.
 
 ## Implementation Rules
 
@@ -108,7 +134,8 @@ Websites and games should use visual assets when visual inspection matters.
 - Prefer small local helpers over broad abstractions unless an established pattern exists.
 - Use semantic HTML and accessible labels.
 - Keep client/server boundaries correct in Next.js. Use `"use client"` only where interactivity requires it.
-- Avoid fetches, secrets, or backend assumptions when building static UI prototypes.
+- Avoid secrets or backend assumptions when building static UI prototypes. Use fetch/network calls only when the project already has the data layer or the user explicitly asks for real integration.
+- Use dynamic imports or lazy loading only when they fit the project framework and solve a real bundle, route, or rendering issue.
 - Do not leave TODO comments, dead controls, or nonfunctional primary actions without an explicit reason.
 
 ## Verification
@@ -138,7 +165,9 @@ If verification cannot run, state the exact command that failed or the environme
 ## Quick Checklist
 
 - Existing stack respected
+- Output contract followed
 - Component primitives reused
+- Accessibility basics covered
 - Tokens used for theme values
 - Responsive desktop and mobile layout
 - Complete states for interactive controls
