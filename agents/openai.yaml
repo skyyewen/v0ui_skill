@@ -1,0 +1,4 @@
+interface:
+  display_name: "V0 UI"
+  short_description: "Build modern v0-like frontend UI with strict component and design constraints."
+  default_prompt: "Use $v0ui to build or refine a frontend with v0-like constraints: React/Next.js, Tailwind, shadcn/ui, responsive layouts, complete interaction states, and rendered verification."
