@@ -43,7 +43,8 @@ Use $v0ui to build this frontend.
 ## 主要约束
 
 - 如果项目已有技术栈，优先遵守现有技术栈和目录结构
-- 如果没有现成栈，默认偏向 React / Next.js / TypeScript / Tailwind CSS
+- 如果没有现成栈，默认必须使用 React / Next.js + TypeScript + Tailwind CSS，并建立 shadcn/ui 兼容组件体系
+- 不允许为了避免安装依赖而静默降级成纯 HTML/CSS/JS；如果安装或脚手架受限，需要说明阻塞或请求确认
 - 优先使用 shadcn/ui、Radix、lucide-react 或项目内已有组件
 - 吸收 v0 prompt 中适合真实项目的输出契约：完整代码、先规划结构、可访问性、媒体、依赖和运行限制
 - 用 token 控制颜色、间距、圆角、边框、阴影和字体层级

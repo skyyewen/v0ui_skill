@@ -21,7 +21,7 @@ Use v0's useful constraints as a project-safe contract, not as a platform clone.
 
 Use the existing project stack first. Do not migrate frameworks or styling systems unless the user asks.
 
-If there is no existing frontend stack, prefer:
+If there is no existing frontend stack, this is a greenfield frontend. The default stack is required, not optional:
 
 - React or Next.js with TypeScript
 - Tailwind CSS
@@ -30,7 +30,15 @@ If there is no existing frontend stack, prefer:
 - lucide-react for common icons
 - CSS variables or Tailwind theme tokens for colors, radius, spacing, and shadows
 
-Do not install dependencies without checking the project package manager and existing conventions.
+Do not deliver plain HTML/CSS/JS for a greenfield `@v0ui` task unless the user explicitly requests static/no-dependency output.
+
+If installing or scaffolding dependencies is blocked by network, package-manager, permission, or environment limits:
+
+1. Try the needed command through the normal approval/escalation flow.
+2. If it is still blocked, stop and report the blocker.
+3. Do not silently substitute a lower-stack implementation.
+
+When an existing app already uses plain HTML/CSS/JS, preserve that stack unless the user asks for a React/Tailwind migration.
 
 ## Surface Classification
 
@@ -155,6 +163,7 @@ If verification cannot run, state the exact command that failed or the environme
 | Mistake | Fix |
 | --- | --- |
 | Starting with decoration | Start with workflow, hierarchy, controls, and states |
+| Avoiding dependencies by outputting static HTML in a greenfield task | Use the required React/Next.js, TypeScript, Tailwind, and shadcn-compatible stack or report the installation blocker |
 | Building custom controls from scratch | Use existing primitives or shadcn/Radix equivalents |
 | Making every surface a card | Use full-width sections and reserve cards for repeated items |
 | Using a single color family everywhere | Use neutral surfaces plus one intentional accent |
@@ -165,6 +174,7 @@ If verification cannot run, state the exact command that failed or the environme
 ## Quick Checklist
 
 - Existing stack respected
+- Greenfield stack requirement followed
 - Output contract followed
 - Component primitives reused
 - Accessibility basics covered
