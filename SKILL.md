@@ -1,11 +1,13 @@
 ---
 name: v0ui
-description: Use when building, redesigning, or modifying frontend web apps, pages, dashboards, SaaS/admin tools, forms, tables, settings screens, landing pages, or interactive tools where the user wants v0-like modern UI quality, React, Next.js, Tailwind, shadcn/ui, responsive polish, or strict frontend generation constraints.
+description: Use when building, redesigning, or modifying frontend web apps, pages, dashboards, SaaS/admin tools, forms, tables, settings screens, landing pages, or interactive tools where the user wants v0-like modern UI quality, minimal commercial SaaS polish, React, Next.js, Tailwind, shadcn/ui, responsive polish, or strict frontend generation constraints.
 ---
 
 # V0 Frontend Constraints
 
-Create modern, polished, v0-like frontend work by narrowing the design space: reuse the existing stack, use the required greenfield stack when no stack exists, build a real shadcn-compatible component layer, rely on design tokens, apply proven layout patterns, include Radix state-driven motion and real interaction states, and verify the rendered UI.
+Create modern, polished, v0-like frontend work by narrowing the design space: reuse the existing stack, use the required greenfield stack when no stack exists, build a real shadcn-compatible component layer, rely on design tokens, apply minimal commercial SaaS visual defaults, include Radix state-driven motion and real interaction states, and verify the rendered UI.
+
+Default visual target: white background, black or near-black text, neutral borders, generous whitespace, clean SaaS panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents only for important states, brand marks, charts, and primary emphasis.
 
 Always read `references/v0-frontend-rules.md` before implementing or reviewing frontend UI. That file is the source of truth for stack defaults, layout patterns, component discipline, visual guardrails, and verification.
 
@@ -17,6 +19,7 @@ Use this skill for requests like:
 - `$v0ui redesign this settings page`
 - `Use $v0ui for this UI`
 - `make this look like v0`
+- `make this look like a clean SaaS dashboard`
 - `build a modern shadcn/Tailwind frontend`
 
 If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the frontend brief to execute.
@@ -25,7 +28,7 @@ If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the fro
 
 1. Inspect the existing project stack, design system, components, tokens, routes, and styling conventions.
 2. Classify the surface as product app, admin/internal tool, marketing page, game, visual tool, or content site.
-3. Follow `references/v0-frontend-rules.md` for the matching surface.
+3. Follow `references/v0-frontend-rules.md` for the matching surface, including the default minimal SaaS visual mode.
 4. If no frontend stack exists, scaffold or create the required React/Next.js + TypeScript + Tailwind CSS + shadcn-compatible stack before implementing UI.
 5. Create or reuse local shadcn-compatible components for the primitives the UI actually uses, such as button, badge, card, input, label, select, textarea, dialog/sheet, tabs, tooltip, and separator.
 6. Wrap Radix primitives inside `components/ui/*`; do not import Radix primitives directly in app/page feature surfaces unless you are editing the wrapper itself.
@@ -37,6 +40,8 @@ If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the fro
 
 - Do not invent a new design system when the repo already has one.
 - Do not ship generic AI UI: random gradient blobs, nested cards, one-hue palettes, oversized decoration, clipped text, or missing states.
+- Do not default to dense enterprise dashboards when the brief asks for v0/shadcn-like UI. Prefer spacious, minimal commercial SaaS composition.
+- Do not replace the default white/neutral/black visual language with colored product chrome unless an existing brand or explicit user request requires it. Important accents may use restrained color.
 - Do not create a landing page when the user asked for an app, tool, game, dashboard, or workflow surface.
 - Do not hand-roll common controls when the stack has suitable primitives.
 - Do not silently downgrade a greenfield `@v0ui` task to plain HTML/CSS/JS to avoid dependencies. Use the required stack, ask for permission if dependency installation is blocked, or state the blocker.

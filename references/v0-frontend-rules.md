@@ -4,6 +4,8 @@
 
 Make the output modern by controlling defaults. v0-like quality comes from consistent component systems, design tokens, familiar layout patterns, restrained visual decisions, complete states, state-driven motion, and rendered verification.
 
+The default visual target is minimal commercial SaaS polish: white background, black or near-black text, neutral borders, generous whitespace, clean product panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents for important states, brand marks, charts, and primary emphasis.
+
 ## V0-Inspired Output Contract
 
 Use v0's useful constraints as a project-safe contract, not as a platform clone.
@@ -40,6 +42,21 @@ If installing or scaffolding dependencies is blocked by network, package-manager
 
 When an existing app already uses plain HTML/CSS/JS, preserve that stack unless the user asks for a React/Tailwind migration.
 
+## Minimal SaaS Visual Mode
+
+Use this visual mode by default for `@v0ui` work.
+
+- Color: default to a white or near-white background with black or near-black foreground. Use `background`, `foreground`, `zinc`, `neutral`, `muted`, `muted-foreground`, `border`, `card`, and `card-foreground` tokens.
+- Primary actions: default to black or `zinc-950` with white text for main commands. Secondary actions should be neutral, outline, or ghost.
+- Accents: important positions may use color. Use restrained brand/status accents for logos, active navigation marks, badges, charts, warnings, progress, or selected states. Avoid turning the whole chrome teal, blue, purple, green, or orange by default.
+- Density: prefer calm, low-to-medium information density. Leave visible whitespace around the main workflow, but keep operational screens usable and scannable.
+- Spacing: use generous page padding, panel padding, and grid gaps where the layout can support it. The UI should feel spacious, not sparse or unfinished.
+- Cards and panels: favor clean SaaS panels with neutral borders, subtle shadows, and stable proportions. Use `rounded-lg`, `rounded-xl`, or the project's radius token by default; use `rounded-2xl` for large feature panels when it improves the composition.
+- Composition: prefer a centered product workspace, clear sidebar/header navigation, and balanced grids over a compressed enterprise dashboard. Tables should appear when the task is truly data-heavy, not as the default visual answer.
+- Interaction: every clickable surface should have visible hover, focus-visible, active, selected, disabled, loading, and open/closed feedback where relevant.
+- Motion: use short, smooth transitions such as `transition-colors`, `transition-shadow`, `transition-transform`, `duration-150`, `duration-200`, and `ease-out`. Avoid abrupt state changes and avoid excessive animation.
+- Shadows and borders: use subtle shadows and neutral borders. Let whitespace, hierarchy, and interaction feedback carry the design before adding decoration.
+
 ## Shadcn-Compatible Component Layer
 
 Installing shadcn, Radix, Tailwind, or lucide dependencies is not enough. A greenfield React/Tailwind `@v0ui` result must expose and use a local shadcn-compatible component layer.
@@ -68,12 +85,12 @@ Choose the correct UI mode before coding:
 
 | Surface | Default direction |
 | --- | --- |
-| SaaS, CRM, admin, internal tool | Dense, quiet, utilitarian, easy to scan, optimized for repeated work |
-| Settings, forms, onboarding | Clear hierarchy, strong validation, stable controls, obvious progress |
-| Data-heavy dashboard | Tables, filters, summaries, tabs, charts only when useful |
-| Marketing or landing page | Strong first-viewport signal, real product/place/person imagery, clear conversion path |
+| SaaS, CRM, admin, internal tool | Minimal commercial SaaS UI with white space, neutral panels, scannable workflows, black primary actions, and restrained accents |
+| Settings, forms, onboarding | Clear hierarchy, generous spacing, strong validation, stable controls, obvious progress |
+| Data-heavy dashboard | Summaries and filters first, tables only when useful, preserve breathing room even in dense views |
+| Marketing or landing page | Strong first-viewport signal, real product/place/person imagery, spacious commercial composition, clear conversion path |
 | Game or visual tool | Actual usable experience first, expressive visuals, stable controls |
-| Content site | Readability, navigation, search/discovery, restrained decoration |
+| Content site | Readability, navigation, search/discovery, generous spacing, restrained decoration |
 
 If the brief is ambiguous, infer from user goals and the current app. Ask only when choosing wrong would force a major rewrite.
 
@@ -105,9 +122,10 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 
 - Use stable dimensions for fixed-format elements such as boards, toolbars, grids, counters, and tiles.
 - Use responsive constraints: `minmax`, `max-width`, `aspect-ratio`, `overflow-auto`, and breakpoint-specific layout changes.
-- Keep page sections unframed. Use cards only for repeated items, modals, and genuinely framed tools.
+- Default to calm layouts with clear whitespace, fewer competing regions, and generous gutters.
+- Keep page sections unframed. Use cards for repeated items, modals, genuinely framed tools, and product panels.
 - Do not put cards inside cards.
-- Avoid oversized hero sections for operational tools.
+- Avoid tiny packed dashboard tiles unless the user explicitly asks for a high-density operational tool.
 - For apps and tools, make the primary workflow visible on the first screen.
 - For landing pages, make the brand, product, place, person, or offer the first-viewport signal and leave a hint of the next section visible.
 - Match text size to container size. Use compact headings inside panels, cards, sidebars, dashboards, and tool surfaces.
@@ -115,10 +133,13 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 ## Visual Rules
 
 - Use tokens for color, border, radius, shadow, and spacing.
-- Prefer neutral surfaces with one intentional accent color.
+- Prefer white or near-white surfaces with black or near-black text and black primary actions.
+- Use clean SaaS cards and panels with neutral borders, subtle shadows, and measured radius. Major panels should feel calm and useful, not like compact table containers.
+- Prefer generous whitespace and calm information density over compact enterprise density.
 - Avoid one-note palettes dominated by a single hue family.
 - Avoid default blue or indigo as the primary visual identity unless the project brand, existing tokens, or user request calls for it.
 - Avoid default purple/purple-blue gradient aesthetics unless the product brand requires it.
+- Avoid green, teal, blue, purple, or orange as the default app chrome when no brand is specified.
 - Avoid decorative gradient orbs, blobs, and bokeh backgrounds.
 - Avoid pure black text on pure white when a softer foreground token exists.
 - Keep shadows subtle; if a shadow is visually loud, reduce it or use border/surface contrast instead.
@@ -190,6 +211,7 @@ If verification cannot run, state the exact command that failed or the environme
 | Mistake | Fix |
 | --- | --- |
 | Starting with decoration | Start with workflow, hierarchy, controls, and states |
+| Building a colored dense admin dashboard for a shadcn/v0-like brief | Use the minimal SaaS visual mode: white background, black text, neutral panels, clear whitespace, restrained accents, and smooth interaction feedback |
 | Avoiding dependencies by outputting static HTML in a greenfield task | Use the required React/Next.js, TypeScript, Tailwind, and shadcn-compatible stack or report the installation blocker |
 | Installing shadcn/Radix dependencies but only creating Button and Badge | Build the local UI component layer for every primitive the surface uses |
 | Using `@radix-ui/react-dialog` directly in `App.tsx` or route files | Wrap Radix in `components/ui/dialog` or `components/ui/sheet`, then import the wrapper |
@@ -206,6 +228,11 @@ If verification cannot run, state the exact command that failed or the environme
 - Existing stack respected
 - Greenfield stack requirement followed
 - Output contract followed
+- White/neutral/black visual foundation used by default
+- Restrained color accents used only at important points
+- Generous whitespace and calm information density present
+- Smooth hover, focus, selected, loading, and open/closed feedback present
+- Clean SaaS cards or panels used where cards are appropriate
 - Shadcn-compatible local component layer present
 - Component primitives reused through local UI wrappers
 - Radix primitives wrapped in `components/ui/*`

@@ -1,4 +1,4 @@
 interface:
   display_name: "V0 UI"
-  short_description: "Build modern v0-like frontend UI with shadcn-style components and strict design constraints."
-  default_prompt: "Use $v0ui to build or refine a frontend with v0-like constraints: React/Next.js, Tailwind, local shadcn-compatible UI components, Radix state transitions, responsive layouts, complete interaction states, and rendered verification."
+  short_description: "Build minimal commercial SaaS UI with clean white surfaces, restrained accents, and strict design constraints."
+  default_prompt: "Use $v0ui to build or refine a frontend with minimal commercial SaaS constraints: white background, black or near-black text, neutral panels, generous whitespace, restrained color accents at important points, smooth transitions, strong interaction feedback, React/Next.js, Tailwind, local shadcn-compatible UI components, Radix state transitions, complete states, and rendered verification."
