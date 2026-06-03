@@ -1,12 +1,12 @@
 # v0ui_skill
 
-> 一个类似 v0 的前端约束 Skill，用于生成现代、干净、可落地的 React / Next.js / Tailwind / shadcn UI。
+> 一个类似 v0 的前端约束 Skill，用来生成现代、干净、可落地的 React / Next.js / Tailwind / shadcn UI。
 
 ## 简介
 
 `v0ui_skill` 提供 `v0ui` Skill。
 
-它的目标不是复制 v0，而是复用 v0 背后的有效约束方式：让 AI 编码助手在更窄、更稳定的前端设计空间里工作，优先使用现有设计系统、组件原语、Tailwind token、响应式布局、完整交互状态和浏览器验证。
+它的目标不是复制 v0 平台，而是复用 v0 背后的有效约束方式：让 AI 编码助手在更窄、更稳定的前端设计空间里工作，优先使用现有设计系统、组件原语、Tailwind token、响应式布局、完整交互状态和浏览器验证。
 
 这个 Skill 适合用在：
 
@@ -24,7 +24,7 @@
 npx skills add skyyewen/v0ui_skill
 ```
 
-安装后即可通过 `@v0ui` 或 `$v0ui` 来触发。
+安装后即可通过 `@v0ui` 或 `$v0ui` 触发。
 
 ## 使用方式
 
@@ -43,8 +43,11 @@ Use $v0ui to build this frontend.
 ## 主要约束
 
 - 如果项目已有技术栈，优先遵守现有技术栈和目录结构
-- 如果没有现成栈，默认必须使用 React / Next.js + TypeScript + Tailwind CSS，并建立 shadcn/ui 兼容组件体系
+- 如果没有现成前端栈，默认必须使用 React / Next.js + TypeScript + Tailwind CSS，并建立 shadcn/ui 兼容组件体系
 - 不允许为了避免安装依赖而静默降级成纯 HTML/CSS/JS；如果安装或脚手架受限，需要说明阻塞或请求确认
+- 不只是安装依赖：必须建立本地 shadcn/ui 兼容组件封装，页面优先使用这些组件
+- Radix primitives 应该封装在 `components/ui/*` 中，业务页面不应直接散落使用原始 Radix 组件
+- Dialog、Sheet、Drawer、Popover、Tooltip 等打开/关闭类组件必须有 Radix `data-state` 进入/退出过渡，不能瞬间弹出或关闭
 - 优先使用 shadcn/ui、Radix、lucide-react 或项目内已有组件
 - 吸收 v0 prompt 中适合真实项目的输出契约：完整代码、先规划结构、可访问性、媒体、依赖和运行限制
 - 用 token 控制颜色、间距、圆角、边框、阴影和字体层级

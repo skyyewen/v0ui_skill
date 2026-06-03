@@ -2,7 +2,7 @@
 
 ## Core Principle
 
-Make the output modern by controlling defaults. v0-like quality comes from consistent component systems, design tokens, familiar layout patterns, restrained visual decisions, complete states, and rendered verification.
+Make the output modern by controlling defaults. v0-like quality comes from consistent component systems, design tokens, familiar layout patterns, restrained visual decisions, complete states, state-driven motion, and rendered verification.
 
 ## V0-Inspired Output Contract
 
@@ -40,6 +40,28 @@ If installing or scaffolding dependencies is blocked by network, package-manager
 
 When an existing app already uses plain HTML/CSS/JS, preserve that stack unless the user asks for a React/Tailwind migration.
 
+## Shadcn-Compatible Component Layer
+
+Installing shadcn, Radix, Tailwind, or lucide dependencies is not enough. A greenfield React/Tailwind `@v0ui` result must expose and use a local shadcn-compatible component layer.
+
+- Create or reuse `src/components/ui/` wrappers for the primitives actually used by the app.
+- Minimum app/dashboard set: `button`, `badge`, `card`, `input`, `label`, `select`, `textarea`, `separator`, and either `dialog` or `sheet` when overlays are used. Add `tabs`, `tooltip`, `dropdown-menu`, `table`, or `form` when the surface needs them.
+- Components should use Tailwind tokens, CSS variables, `cn`, `class-variance-authority` where useful, `forwardRef`, and `asChild` for composable interactive primitives.
+- Feature files, route files, and `App.tsx` should import local UI components, not raw `@radix-ui/*` primitives. Direct Radix imports belong inside `components/ui/*` wrappers unless there is a documented exception.
+- Do not call a UI shadcn-like if it only has one or two wrappers such as Button and Badge while the rest of the app uses hand-rolled controls.
+
+## Dialog, Sheet, And Radix Motion
+
+Overlays must feel like shadcn/Radix UI, not instant DOM toggles.
+
+- Dialog, Sheet, Drawer, Popover, Dropdown, Tooltip, and Tabs must use accessible Radix behavior or an equivalent existing component primitive.
+- Overlay/backdrop elements need open/closed fade transitions, such as `data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0`.
+- Center dialogs need open/closed fade, zoom, and slight slide transitions.
+- Right-side sheets/drawers need `data-[state=open]:slide-in-from-right` and `data-[state=closed]:slide-out-to-right` or equivalent directional motion.
+- Include duration/easing classes and reduced-motion compatibility when the project already supports it.
+- If Tailwind animation classes require `tailwindcss-animate`, custom keyframes, or global CSS, add the configuration. Do not leave animation class names inert.
+- Include close controls, title/description structure, focus management, escape/outside-click behavior through Radix, and scroll containment for long content.
+
 ## Surface Classification
 
 Choose the correct UI mode before coding:
@@ -63,7 +85,7 @@ Prefer component primitives over custom markup:
 - Forms: use labels, helper text, validation, errors, disabled states, and clear submit behavior.
 - Tables: include sorting/filter affordances, empty states, pagination or scrolling constraints when needed.
 - Navigation: include active states and predictable hierarchy.
-- Dialogs and drawers: include title, description when useful, primary action, cancel/close path, focus behavior.
+- Dialogs and drawers: use local Dialog/Sheet wrappers, include title, description when useful, primary action, cancel/close path, focus behavior, scroll containment, and visible open/close motion.
 - Settings: use toggles for binary options, selects/menus for option sets, sliders/inputs for numeric values, segmented controls for modes.
 - Toolbars: use icons with tooltips for familiar actions.
 
@@ -109,6 +131,7 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 Use motion only when it clarifies state or improves perceived quality.
 
 - Add hover, focus-visible, active, selected, disabled, loading, success, error, and empty states when relevant.
+- Add `data-state` based transitions for Radix open/closed surfaces. No instant modal, drawer, popover, dropdown, or tooltip transitions unless the user explicitly asks for no motion.
 - Keep transitions short and consistent.
 - Avoid stacking many micro-animations on the same surface.
 - Respect reduced-motion patterns if the codebase already supports them.
@@ -140,6 +163,7 @@ Websites and games should use visual assets when visual inspection matters.
 - Preserve the repo's architecture, routing, state management, styling conventions, and import aliases.
 - Keep edits scoped to the requested frontend surface.
 - Prefer small local helpers over broad abstractions unless an established pattern exists.
+- In React/Tailwind projects, route and feature files should import from the local `components/ui/*` layer instead of using raw Radix primitives directly.
 - Use semantic HTML and accessible labels.
 - Keep client/server boundaries correct in Next.js. Use `"use client"` only where interactivity requires it.
 - Avoid secrets or backend assumptions when building static UI prototypes. Use fetch/network calls only when the project already has the data layer or the user explicitly asks for real integration.
@@ -154,7 +178,10 @@ Before final response:
 2. Open the app in a browser when the target is a local frontend.
 3. Check at least one desktop viewport and one mobile viewport.
 4. Look for blank screens, console errors, broken imports, broken icons, missing assets, overflow, overlap, clipped text, layout shift, and unreachable controls.
-5. Fix visual or runtime defects before claiming the UI is complete.
+5. Open and close every dialog, sheet, drawer, popover, dropdown, and tooltip touched by the work. Verify visible enter/exit transitions and focus behavior.
+6. Search feature surfaces for direct `@radix-ui/*` imports. Keep them only in local UI wrappers or document the exception.
+7. Verify Tailwind animation utilities or custom keyframes are configured when the UI uses animation class names.
+8. Fix visual or runtime defects before claiming the UI is complete.
 
 If verification cannot run, state the exact command that failed or the environmental blocker.
 
@@ -164,6 +191,9 @@ If verification cannot run, state the exact command that failed or the environme
 | --- | --- |
 | Starting with decoration | Start with workflow, hierarchy, controls, and states |
 | Avoiding dependencies by outputting static HTML in a greenfield task | Use the required React/Next.js, TypeScript, Tailwind, and shadcn-compatible stack or report the installation blocker |
+| Installing shadcn/Radix dependencies but only creating Button and Badge | Build the local UI component layer for every primitive the surface uses |
+| Using `@radix-ui/react-dialog` directly in `App.tsx` or route files | Wrap Radix in `components/ui/dialog` or `components/ui/sheet`, then import the wrapper |
+| Shipping instant modals or drawers with no `data-state` animation | Add open/closed fade, zoom, or directional slide transitions and verify them in browser |
 | Building custom controls from scratch | Use existing primitives or shadcn/Radix equivalents |
 | Making every surface a card | Use full-width sections and reserve cards for repeated items |
 | Using a single color family everywhere | Use neutral surfaces plus one intentional accent |
@@ -176,7 +206,11 @@ If verification cannot run, state the exact command that failed or the environme
 - Existing stack respected
 - Greenfield stack requirement followed
 - Output contract followed
-- Component primitives reused
+- Shadcn-compatible local component layer present
+- Component primitives reused through local UI wrappers
+- Radix primitives wrapped in `components/ui/*`
+- Dialog/sheet/popover enter and exit transitions verified
+- Tailwind animation utilities or keyframes configured when needed
 - Accessibility basics covered
 - Tokens used for theme values
 - Responsive desktop and mobile layout
