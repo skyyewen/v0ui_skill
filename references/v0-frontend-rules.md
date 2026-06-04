@@ -4,7 +4,7 @@
 
 Make the output modern by controlling defaults. v0-like quality comes from consistent component systems, design tokens, familiar layout patterns, restrained visual decisions, complete states, state-driven motion, and rendered verification.
 
-The default visual target is minimal commercial SaaS polish: white background, black or near-black text, neutral borders, generous whitespace, clean product panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents for important states, brand marks, charts, and primary emphasis.
+The default visual target is minimal commercial SaaS polish: white background, black or near-black text, neutral borders, generous whitespace, clean product panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents for important states, brand marks, charts, and primary emphasis. Reserve pure-black filled controls for truly primary actions; ordinary selected navigation, step markers, filters, badges, and status chips should feel quiet.
 
 ## V0-Inspired Output Contract
 
@@ -46,8 +46,10 @@ When an existing app already uses plain HTML/CSS/JS, preserve that stack unless 
 
 Use this visual mode by default for `@v0ui` work.
 
-- Color: default to a white or near-white background with black or near-black foreground. Use `background`, `foreground`, `zinc`, `neutral`, `muted`, `muted-foreground`, `border`, `card`, and `card-foreground` tokens.
-- Primary actions: default to black or `zinc-950` with white text for main commands. Secondary actions should be neutral, outline, or ghost.
+- Color: default to a white or near-white background with black or near-black foreground. Use `background`, `foreground`, `zinc`, `neutral`, `muted`, `muted-foreground`, `border`, `card`, and `card-foreground` tokens. Pure black should be a scarce emphasis color, not a general selected-state color.
+- Primary actions: default to black or `zinc-950` with white text for the highest-priority command on the screen. Secondary actions should be neutral, outline, or ghost. Avoid multiple black-filled buttons unless they are genuinely equivalent primary commands.
+- Navigation and tabs: active sidebar items, tabs, and segmented controls should usually use a light neutral selected row or pill (`muted`, `zinc-100`, `neutral-100`), dark text, subtle border or shadow, and neutral icons. Do not make ordinary navigation tabs black-filled just because they are selected.
+- Workflow steps and chips: numbered steps, progress markers, status badges, filters, and informational chips should use neutral rings, borders, muted fills, or small accents. Do not use pure black filled circles or pills for passive ordering information.
 - Accents: important positions may use color. Use restrained brand/status accents for logos, active navigation marks, badges, charts, warnings, progress, or selected states. Avoid turning the whole chrome teal, blue, purple, green, or orange by default.
 - Density: prefer calm, low-to-medium information density. Leave visible whitespace around the main workflow, but keep operational screens usable and scannable.
 - Spacing: use generous page padding, panel padding, and grid gaps where the layout can support it. The UI should feel spacious, not sparse or unfinished.
@@ -85,7 +87,7 @@ Choose the correct UI mode before coding:
 
 | Surface | Default direction |
 | --- | --- |
-| SaaS, CRM, admin, internal tool | Minimal commercial SaaS UI with white space, neutral panels, scannable workflows, black primary actions, and restrained accents |
+| SaaS, CRM, admin, internal tool | Minimal commercial SaaS UI with white space, neutral panels, scannable workflows, rare black primary actions, quiet navigation states, and restrained accents |
 | Settings, forms, onboarding | Clear hierarchy, generous spacing, strong validation, stable controls, obvious progress |
 | Data-heavy dashboard | Summaries and filters first, tables only when useful, preserve breathing room even in dense views |
 | Marketing or landing page | Strong first-viewport signal, real product/place/person imagery, spacious commercial composition, clear conversion path |
@@ -133,7 +135,9 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 ## Visual Rules
 
 - Use tokens for color, border, radius, shadow, and spacing.
-- Prefer white or near-white surfaces with black or near-black text and black primary actions.
+- Prefer white or near-white surfaces with black or near-black text, while reserving black filled treatments for true primary actions.
+- Do not use pure-black filled backgrounds for ordinary selected navigation, sidebar tabs, segmented tabs, step numbers, filter chips, badges, or informational statuses. Use muted neutral surfaces, subtle borders, small accents, or font weight for these lower-priority states.
+- For Vercel-like dashboards, keep the left navigation selected state light gray with dark text and a neutral icon; keep black buttons rare and action-oriented.
 - Use clean SaaS cards and panels with neutral borders, subtle shadows, and measured radius. Major panels should feel calm and useful, not like compact table containers.
 - Prefer generous whitespace and calm information density over compact enterprise density.
 - Avoid one-note palettes dominated by a single hue family.
@@ -212,6 +216,7 @@ If verification cannot run, state the exact command that failed or the environme
 | --- | --- |
 | Starting with decoration | Start with workflow, hierarchy, controls, and states |
 | Building a colored dense admin dashboard for a shadcn/v0-like brief | Use the minimal SaaS visual mode: white background, black text, neutral panels, clear whitespace, restrained accents, and smooth interaction feedback |
+| Making every selected item black-filled | Reserve black fill for true primary actions; use light neutral active states for sidebars, tabs, step indicators, filters, badges, and statuses |
 | Avoiding dependencies by outputting static HTML in a greenfield task | Use the required React/Next.js, TypeScript, Tailwind, and shadcn-compatible stack or report the installation blocker |
 | Installing shadcn/Radix dependencies but only creating Button and Badge | Build the local UI component layer for every primitive the surface uses |
 | Using `@radix-ui/react-dialog` directly in `App.tsx` or route files | Wrap Radix in `components/ui/dialog` or `components/ui/sheet`, then import the wrapper |
@@ -229,6 +234,8 @@ If verification cannot run, state the exact command that failed or the environme
 - Greenfield stack requirement followed
 - Output contract followed
 - White/neutral/black visual foundation used by default
+- Black filled controls reserved for truly primary actions
+- Navigation tabs, workflow steps, filters, badges, and status chips use quiet neutral selected states
 - Restrained color accents used only at important points
 - Generous whitespace and calm information density present
 - Smooth hover, focus, selected, loading, and open/closed feedback present
