@@ -7,7 +7,7 @@ description: Use when building, redesigning, or modifying frontend web apps, pag
 
 Create modern, polished, v0-like frontend work by narrowing the design space: reuse the existing stack, use the required greenfield stack when no stack exists, build a real shadcn-compatible component layer, rely on design tokens, apply minimal commercial SaaS visual defaults, include Radix state-driven motion and real interaction states, and verify the rendered UI.
 
-Default visual target: white background, black or near-black text, neutral borders, generous whitespace, clean SaaS panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents only for important states, brand marks, charts, and primary emphasis. Reserve pure-black filled controls for truly primary actions; sidebar tabs, workflow steps, filters, badges, and status chips should usually use light neutral selected states, subtle borders, and typography weight instead of black pills.
+Default visual target: a Vercel-inspired neutral SaaS surface, not a monochrome wireframe. When no existing theme overrides it, use a soft near-white app background around `#fafafa`, strong headings around `#261b17`, body/navigation text around `#575757`, neutral borders, generous whitespace, clean SaaS panels, smooth transitions, and clear human-computer interaction feedback. Use restrained color accents for semantic status, brand/project marks, product avatars, charts, progress, and primary emphasis. Reserve pure-black filled controls for truly primary actions; sidebar tabs, workflow steps, filters, badges, and status chips should usually use light neutral selected states, subtle borders, typography weight, or small semantic accents instead of black pills.
 
 Always read `references/v0-frontend-rules.md` before implementing or reviewing frontend UI. That file is the source of truth for stack defaults, layout patterns, component discipline, visual guardrails, and verification.
 
@@ -41,7 +41,7 @@ If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the fro
 - Do not invent a new design system when the repo already has one.
 - Do not ship generic AI UI: random gradient blobs, nested cards, one-hue palettes, oversized decoration, clipped text, or missing states.
 - Do not default to dense enterprise dashboards when the brief asks for v0/shadcn-like UI. Prefer spacious, minimal commercial SaaS composition.
-- Do not replace the default white/neutral/black visual language with colored product chrome unless an existing brand or explicit user request requires it. Important accents may use restrained color.
+- Do not replace the default near-white/neutral/dark visual language with colored product chrome unless an existing brand or explicit user request requires it. Important accents should use restrained semantic or brand color instead of leaving every icon black or gray.
 - Do not use black-filled navigation tabs, step indicators, filter chips, badges, or secondary workflow controls by default. A Vercel-like active navigation item is usually a light neutral row with dark text, not a black pill.
 - Do not create a landing page when the user asked for an app, tool, game, dashboard, or workflow surface.
 - Do not hand-roll common controls when the stack has suitable primitives.

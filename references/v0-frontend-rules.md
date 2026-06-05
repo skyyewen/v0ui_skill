@@ -46,11 +46,11 @@ When an existing app already uses plain HTML/CSS/JS, preserve that stack unless 
 
 Use this visual mode by default for `@v0ui` work.
 
-- Color: default to a white or near-white background with black or near-black foreground. Use `background`, `foreground`, `zinc`, `neutral`, `muted`, `muted-foreground`, `border`, `card`, and `card-foreground` tokens. Pure black should be a scarce emphasis color, not a general selected-state color.
+- Color: default to a Vercel-inspired neutral palette, not a monochrome UI. When no existing theme overrides it, use a near-white app background around `#fafafa`, strong headings around `#261b17`, body/navigation text around `#575757`, white cards, quiet neutral borders, and token equivalents such as `background`, `foreground`, `zinc`, `neutral`, `muted`, `muted-foreground`, `border`, `card`, and `card-foreground`. Pure black should be a scarce emphasis color, not a general selected-state color.
 - Primary actions: default to black or `zinc-950` with white text for the highest-priority command on the screen. Secondary actions should be neutral, outline, or ghost. Avoid multiple black-filled buttons unless they are genuinely equivalent primary commands.
 - Navigation and tabs: active sidebar items, tabs, and segmented controls should usually use a light neutral selected row or pill (`muted`, `zinc-100`, `neutral-100`), dark text, subtle border or shadow, and neutral icons. Do not make ordinary navigation tabs black-filled just because they are selected.
 - Workflow steps and chips: numbered steps, progress markers, status badges, filters, and informational chips should use neutral rings, borders, muted fills, or small accents. Do not use pure black filled circles or pills for passive ordering information.
-- Accents: important positions may use color. Use restrained brand/status accents for logos, active navigation marks, badges, charts, warnings, progress, or selected states. Avoid turning the whole chrome teal, blue, purple, green, or orange by default.
+- Accents: important positions should use small, purposeful color. Use restrained brand/status accents for logos, project avatars, product icons, active navigation marks, badges, charts, warnings, progress, or selected states. Avoid turning the whole chrome teal, blue, purple, green, or orange by default.
 - Density: prefer calm, low-to-medium information density. Leave visible whitespace around the main workflow, but keep operational screens usable and scannable.
 - Spacing: use generous page padding, panel padding, and grid gaps where the layout can support it. The UI should feel spacious, not sparse or unfinished.
 - Cards and panels: favor clean SaaS panels with neutral borders, subtle shadows, and stable proportions. Use `rounded-lg`, `rounded-xl`, or the project's radius token by default; use `rounded-2xl` for large feature panels when it improves the composition.
@@ -58,6 +58,31 @@ Use this visual mode by default for `@v0ui` work.
 - Interaction: every clickable surface should have visible hover, focus-visible, active, selected, disabled, loading, and open/closed feedback where relevant.
 - Motion: use short, smooth transitions such as `transition-colors`, `transition-shadow`, `transition-transform`, `duration-150`, `duration-200`, and `ease-out`. Avoid abrupt state changes and avoid excessive animation.
 - Shadows and borders: use subtle shadows and neutral borders. Let whitespace, hierarchy, and interaction feedback carry the design before adding decoration.
+
+### Vercel-Inspired Neutral Palette
+
+Use these values as a practical default when the project has no stronger theme tokens:
+
+- App background: `#fafafa` or the closest `background` token.
+- Card and input surfaces: white or the closest `card` token, with a quiet neutral border.
+- Strong text, headings, primary labels: `#261b17`, `zinc-950`, `neutral-950`, or the closest `foreground` token.
+- Body text, sidebar labels, descriptions, metadata: `#575757`, `zinc-600`, `neutral-600`, or the closest `muted-foreground` token.
+- Disabled or tertiary text: a softer neutral such as `zinc-400` or `neutral-400`.
+
+Do not force these exact hex values over an existing design system. Map them into the local CSS variables or Tailwind theme when possible.
+
+### Semantic Icon And Accent Color
+
+Neutral structure should not mean every icon is gray. Use color where it carries meaning or identity:
+
+- Success, completed, synced, accepted: emerald or green icon/text accents.
+- Pending, waiting, needs review, queued: amber or orange accents.
+- Error, blocked, destructive, policy risk: red accents.
+- Info, running, live, analytics, deploy/build activity: sky, cyan, or blue accents.
+- AI, automation, generation, model, sparkle-like actions: violet, cyan, or a small brand accent when appropriate.
+- Product marks, project avatars, integration logos, chart series, and progress indicators may be colorful even inside an otherwise neutral page.
+
+Keep colored accents small and semantic: icon color, dot, thin ring, tiny badge, chart line, progress segment, or avatar fill. Do not make ordinary navigation, whole sidebars, panel backgrounds, or large empty decorative shapes colorful by default.
 
 ## Shadcn-Compatible Component Layer
 
@@ -135,9 +160,11 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 ## Visual Rules
 
 - Use tokens for color, border, radius, shadow, and spacing.
-- Prefer white or near-white surfaces with black or near-black text, while reserving black filled treatments for true primary actions.
+- Prefer `#fafafa`-like near-white app backgrounds, white cards, `#261b17`-like strong text, and `#575757`-like body text when no existing theme overrides them.
+- Reserve black filled treatments for true primary actions; do not rely on pure black for ordinary selected or status states.
 - Do not use pure-black filled backgrounds for ordinary selected navigation, sidebar tabs, segmented tabs, step numbers, filter chips, badges, or informational statuses. Use muted neutral surfaces, subtle borders, small accents, or font weight for these lower-priority states.
 - For Vercel-like dashboards, keep the left navigation selected state light gray with dark text and a neutral icon; keep black buttons rare and action-oriented.
+- For Vercel-like dashboards, use colorful semantic icons or tiny accents for statuses, project avatars, product marks, integrations, progress, warnings, success, and errors. Avoid making all icons black, gray, or the same neutral color when they represent different states.
 - Use clean SaaS cards and panels with neutral borders, subtle shadows, and measured radius. Major panels should feel calm and useful, not like compact table containers.
 - Prefer generous whitespace and calm information density over compact enterprise density.
 - Avoid one-note palettes dominated by a single hue family.
@@ -215,7 +242,8 @@ If verification cannot run, state the exact command that failed or the environme
 | Mistake | Fix |
 | --- | --- |
 | Starting with decoration | Start with workflow, hierarchy, controls, and states |
-| Building a colored dense admin dashboard for a shadcn/v0-like brief | Use the minimal SaaS visual mode: white background, black text, neutral panels, clear whitespace, restrained accents, and smooth interaction feedback |
+| Building a colored dense admin dashboard for a shadcn/v0-like brief | Use the minimal SaaS visual mode: `#fafafa`-like background, soft dark text, neutral panels, clear whitespace, restrained semantic accents, and smooth interaction feedback |
+| Making the interface look like a black-and-white wireframe | Keep the structural UI neutral, but add semantic color to status icons, project avatars, product marks, chart series, progress, warnings, success, errors, and AI actions |
 | Making every selected item black-filled | Reserve black fill for true primary actions; use light neutral active states for sidebars, tabs, step indicators, filters, badges, and statuses |
 | Avoiding dependencies by outputting static HTML in a greenfield task | Use the required React/Next.js, TypeScript, Tailwind, and shadcn-compatible stack or report the installation blocker |
 | Installing shadcn/Radix dependencies but only creating Button and Badge | Build the local UI component layer for every primitive the surface uses |
@@ -233,10 +261,10 @@ If verification cannot run, state the exact command that failed or the environme
 - Existing stack respected
 - Greenfield stack requirement followed
 - Output contract followed
-- White/neutral/black visual foundation used by default
+- Vercel-inspired neutral foundation used by default: `#fafafa`-like background, `#261b17`-like strong text, and `#575757`-like body text or equivalent tokens
 - Black filled controls reserved for truly primary actions
 - Navigation tabs, workflow steps, filters, badges, and status chips use quiet neutral selected states
-- Restrained color accents used only at important points
+- Restrained semantic color accents used for statuses, project avatars, product marks, charts, progress, warnings, success, errors, and AI actions
 - Generous whitespace and calm information density present
 - Smooth hover, focus, selected, loading, and open/closed feedback present
 - Clean SaaS cards or panels used where cards are appropriate
