@@ -55,7 +55,7 @@ Use this visual mode by default for `@v0ui` work.
 - Spacing: use generous page padding, panel padding, and grid gaps where the layout can support it. The UI should feel spacious, not sparse or unfinished.
 - Cards and panels: favor clean SaaS panels with neutral borders, subtle shadows, and stable proportions. Use `rounded-lg`, `rounded-xl`, or the project's radius token by default; use `rounded-2xl` for large feature panels when it improves the composition.
 - Composition: prefer a centered product workspace, clear sidebar/header navigation, and balanced grids over a compressed enterprise dashboard. Tables should appear when the task is truly data-heavy, not as the default visual answer.
-- Interaction: every clickable surface should have visible hover, focus-visible, active, selected, disabled, loading, and open/closed feedback where relevant.
+- Interaction: every clickable surface should have visible hover, focus-visible, active, selected, cursor, disabled, loading, and open/closed feedback where relevant. Vercel-like clickable surfaces should use `cursor-pointer` unless disabled or non-interactive.
 - Motion: use short, smooth transitions such as `transition-colors`, `transition-shadow`, `transition-transform`, `duration-150`, `duration-200`, and `ease-out`. Avoid abrupt state changes and avoid excessive animation.
 - Shadows and borders: use subtle shadows and neutral borders. Let whitespace, hierarchy, and interaction feedback carry the design before adding decoration.
 
@@ -125,10 +125,10 @@ If the brief is ambiguous, infer from user goals and the current app. Ask only w
 
 Prefer component primitives over custom markup:
 
-- Buttons: use icon-only or icon + short label when the action is familiar.
+- Buttons: use icon-only or icon + short label when the action is familiar. Buttons and icon buttons should use `cursor-pointer` when enabled, and a disabled cursor or default disabled semantics when unavailable.
 - Forms: use labels, helper text, validation, errors, disabled states, and clear submit behavior.
 - Tables: include sorting/filter affordances, empty states, pagination or scrolling constraints when needed.
-- Navigation: include active states and predictable hierarchy.
+- Navigation: include active states, predictable hierarchy, and `cursor-pointer` on clickable sidebar items, tabs, breadcrumbs, menu items, and selectable rows.
 - Dialogs and drawers: use local Dialog/Sheet wrappers, include title, description when useful, primary action, cancel/close path, focus behavior, scroll containment, and visible open/close motion.
 - Settings: use toggles for binary options, selects/menus for option sets, sliders/inputs for numeric values, segmented controls for modes.
 - Toolbars: use icons with tooltips for familiar actions.
@@ -183,6 +183,7 @@ Use lucide-react icons when available. Do not manually draw icons unless the app
 Use motion only when it clarifies state or improves perceived quality.
 
 - Add hover, focus-visible, active, selected, disabled, loading, success, error, and empty states when relevant.
+- Use cursor affordances deliberately: `cursor-pointer` for enabled buttons, links, sidebar tabs, tabs, menu triggers, icon buttons, selectable rows, and clickable cards; `cursor-not-allowed` or native disabled behavior for disabled controls; native text cursors for inputs and textareas; `cursor-grab`/`cursor-grabbing` for draggable handles.
 - Add `data-state` based transitions for Radix open/closed surfaces. No instant modal, drawer, popover, dropdown, or tooltip transitions unless the user explicitly asks for no motion.
 - Keep transitions short and consistent.
 - Avoid stacking many micro-animations on the same surface.
@@ -266,7 +267,7 @@ If verification cannot run, state the exact command that failed or the environme
 - Navigation tabs, workflow steps, filters, badges, and status chips use quiet neutral selected states
 - Restrained semantic color accents used for statuses, project avatars, product marks, charts, progress, warnings, success, errors, and AI actions
 - Generous whitespace and calm information density present
-- Smooth hover, focus, selected, loading, and open/closed feedback present
+- Smooth hover, focus, pointer cursor, selected, loading, and open/closed feedback present
 - Clean SaaS cards or panels used where cards are appropriate
 - Shadcn-compatible local component layer present
 - Component primitives reused through local UI wrappers

@@ -33,7 +33,7 @@ If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the fro
 5. Create or reuse local shadcn-compatible components for the primitives the UI actually uses, such as button, badge, card, input, label, select, textarea, dialog/sheet, tabs, tooltip, and separator.
 6. Wrap Radix primitives inside `components/ui/*`; do not import Radix primitives directly in app/page feature surfaces unless you are editing the wrapper itself.
 7. Prefer existing components and tokens before adding custom CSS or extra dependencies.
-8. Implement complete responsive UI, including empty, loading, error, hover, focus, disabled, selected, open, closed, and transition states when relevant.
+8. Implement complete responsive UI, including empty, loading, error, hover, focus, cursor, disabled, selected, open, closed, and transition states when relevant.
 9. Run the project and inspect the result in desktop and mobile viewports before claiming completion.
 
 ## Non-Negotiables
@@ -43,6 +43,7 @@ If the user invokes `@v0ui` or `$v0ui`, treat the rest of the message as the fro
 - Do not default to dense enterprise dashboards when the brief asks for v0/shadcn-like UI. Prefer spacious, minimal commercial SaaS composition.
 - Do not replace the default near-white/neutral/dark visual language with colored product chrome unless an existing brand or explicit user request requires it. Important accents should use restrained semantic or brand color instead of leaving every icon black or gray.
 - Do not use black-filled navigation tabs, step indicators, filter chips, badges, or secondary workflow controls by default. A Vercel-like active navigation item is usually a light neutral row with dark text, not a black pill.
+- Do not leave clickable controls with the default arrow cursor. Buttons, links, sidebar items, tabs, menu triggers, icon buttons, selectable rows, and clickable cards should use a pointer cursor unless they are disabled or non-interactive.
 - Do not create a landing page when the user asked for an app, tool, game, dashboard, or workflow surface.
 - Do not hand-roll common controls when the stack has suitable primitives.
 - Do not silently downgrade a greenfield `@v0ui` task to plain HTML/CSS/JS to avoid dependencies. Use the required stack, ask for permission if dependency installation is blocked, or state the blocker.
